@@ -4,11 +4,11 @@ include "text-only.class.php";
 $text = new TextOnly(48);
 
 $text->addRow("DOCUMENTO NÃO FISCAL");
-$text->addRow("CUPOM PARA COZINHA");
+$text->addRow("CUPOM DE TESTE");
 $text->addHorizontalLine();
-$text->addRow("PEDIDO #247");
-$text->addRow("AVENIDA FIORELLI PECCICACCO, 312 - 46° DISTRITO POLICIAL - PERTO DAS COMIDAS ONDE TEM FELICIDADE");
-$text->addRow("(11) 94704-0324");
+$text->addRow("PEDIDO #123");
+$text->addRow("RUA DA AVENIDA, 123");
+$text->addRow("(13) 3333-3333");
 $text->addHorizontalLine();
 
 $tableHeader = array(
@@ -17,8 +17,7 @@ $tableHeader = array(
 );
 
 $tableContent = array(
-  array("01", "FEIJOADA (MARMITEX)"),
-  array("01", "TEMAKI DE FRANGO COM CACHORRO QUENTE COM MUITO SHOYO")
+  array("01", "ARROZ E FEIJOADA")
 );
 
 $text->addTable($tableHeader, $tableContent);
