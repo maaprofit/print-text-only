@@ -17,7 +17,7 @@ class TextOnly {
         return $this->fileContent;
     }
 
-    public function addRow($content)
+    public function addRow($content, $i = 0)
     {
         $content = mb_strtoupper($content);
         $rowContent = substr($content, ($this->maxLength * $i), $this->maxLength);
