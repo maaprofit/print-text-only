@@ -19,11 +19,18 @@ class TextOnly {
 
     public function addRow($content)
     {
-        $contentLength = strlen($content) % 2;
+        $content = mb_strtoupper($content);
+        $rowContent = substr($content, ($this->maxLength * $i), $this->maxLength);
+
+        $contentLength = strlen($rowContent) % 2;
         $padded  = ($contentLength > 0) ? " " : "";
-        $padded .= str_pad($content, $this->maxLength, " ", STR_PAD_BOTH);
+        $padded .= str_pad($rowContent, $this->maxLength, " ", STR_PAD_BOTH);
 
         $this->fileContent .= ($padded . "\n");
+
+        if ((strlen($content) - ($this->maxLength * $i)) > $this->maxLength) {
+            $this->addRow($content, ($i + 1));
+        }
     }
 
     public function addHorizontalLine()
@@ -53,7 +60,11 @@ class TextOnly {
 
         if (!empty($header) && is_array($header)) {
             foreach ($header as $name => $spaces) {
-                $head .= str_pad($name, $spaces);
+                if (strlen($name) < $spaces) {
+                    $name = str_pad($name, $spaces, " ", STR_PAD_RIGHT);
+                }
+
+                $head .= $name;
                 $this->headParams[] = $spaces;
             }
 
@@ -84,9 +95,9 @@ class TextOnly {
         }
     }
 
-    public function saveFile()
+    public function saveFile($path = "print.txt")
     {
-        $handle = fopen("print.txt", "w");
+        $handle = fopen($path, "w");
         fwrite($handle, $this->fileContent);
         fclose($handle);
     }
